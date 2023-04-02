@@ -18,17 +18,18 @@ def download_audio(url: str, output_dir: str) -> str:
     audio_channel.download(output_path=output_dir)
     return filename
 
-def transcribe_audio(audio_path: str) -> str:
+def transcribe_audio(audio_path: str, whisper_model: str="base") -> str:
     """
     Transcribe an audio file using Whisper
     
     Args:
         audio_path (str): The path to the audio file to transcribe
+        whisper_model (str): The model to use for transcription (one of: "tiny", "base", "small", "medium", "large")
     
     Returns:
         str: The transcribed text
     """
-    model = whisper.load_model("base")
+    model = whisper.load_model(whisper_model)
     transcription = model.transcribe(audio_path)
     return transcription['text']
 
